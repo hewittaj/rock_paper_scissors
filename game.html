@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+</head>
+<body>
+    <script>
+        // Declare our variables
+        const playerSelection = "rock";
+        const computerSelection = computerPlay().toLowerCase();
+        playRound(playerSelection, computerSelection);
+
+        // Function that randomizes the computers play
+        function computerPlay(){
+            let choices = ["Rock", "Paper", "Scissors"];
+            let randomNumber = Math.floor(Math.random() * Math.floor(3));
+            return choices[randomNumber];
+        }
+        
+        //console.log(`${playerSelection} ${computerSelection}`);
+
+        // Function that plays a round based off the player selection and computer selection and returns the result
+        function playRound(playerSelection, computerSelection){
+            let result = detectLossOrWin(playerSelection, computerSelection);
+            console.log(result);
+            if(result == "tie"){
+                console.log("You ${result}")
+            }
+        }
+        
+        // Function that detects a loss or win based off of the inputs and returns a string of how they did
+        function detectLossOrWin(playerSelection, computerSelection){
+            switch(playerSelection){
+                case(playerSelection == "rock"):
+                    if(computerSelection == "paper"){
+                        return "win";
+                    }else if(computerSelection == "rock"){
+                        return "tie";
+                    }else{
+                        return "lose";
+                    }
+
+                case(playerSelection == "paper"):
+                    if(computerSelection == "paper"){
+                        return "tie";
+                    }else if(computerSelection == "scissors"){
+                        return "lose"
+                    }else{
+                        return "win"
+                    }
+
+                case(playerSelection == "scissors"):
+                    if(computerSelection == "scissors"){
+                        return "tie";
+                    }else if(computerSelection == "rock"){
+                        return "lose";
+                    }else{
+                        return "win";
+                    }
+            }
+                
+        }
+    </script>
+</body>
+
+</html>
