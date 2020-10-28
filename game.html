@@ -4,9 +4,12 @@
     
 </head>
 <body>
+    <h1>Result of your game!</h1>
+    <p id="result"></p>
+
     <script>
         // Declare our variables
-        const playerSelection = "rock";
+        const playerSelection = prompt("What would you like to "); // TO DO 
         const computerSelection = computerPlay().toLowerCase();
         playRound(playerSelection, computerSelection);
 
@@ -16,49 +19,64 @@
             let randomNumber = Math.floor(Math.random() * Math.floor(3));
             return choices[randomNumber];
         }
-        
-        //console.log(`${playerSelection} ${computerSelection}`);
 
-        // Function that plays a round based off the player selection and computer selection and returns the result
-        function playRound(playerSelection, computerSelection){
-            let result = detectLossOrWin(playerSelection, computerSelection);
-            console.log(result);
-            if(result == "tie"){
-                console.log("You ${result}")
-            }
-        }
-        
         // Function that detects a loss or win based off of the inputs and returns a string of how they did
-        function detectLossOrWin(playerSelection, computerSelection){
-            switch(playerSelection){
-                case(playerSelection == "rock"):
+        function detectLossOrWin(playerSelection, computerSelection){  
+                if(playerSelection == "rock"){
                     if(computerSelection == "paper"){
                         return "win";
                     }else if(computerSelection == "rock"){
-                        return "tie";
+                        return "tied";
                     }else{
                         return "lose";
                     }
-
-                case(playerSelection == "paper"):
+                }
+                    
+                console.log(1);
+                if(playerSelection == "paper"){
                     if(computerSelection == "paper"){
-                        return "tie";
+                        return "tied";
                     }else if(computerSelection == "scissors"){
                         return "lose"
                     }else{
                         return "win"
                     }
-
-                case(playerSelection == "scissors"):
+                }
+                    
+                console.log(2);
+                if(playerSelection == "scissors"){
                     if(computerSelection == "scissors"){
-                        return "tie";
+                        return "tied";
                     }else if(computerSelection == "rock"){
                         return "lose";
                     }else{
                         return "win";
-                    }
+                    }   
+                }
+                                 
+        }
+
+        // Function that plays a round five times and returns who won most
+        function game(playerSelection, computerSelection){
+
+        }
+
+        // Function that plays a round based off the player selection and computer selection and returns the result
+        function playRound(playerSelection, computerSelection){
+            let result = detectLossOrWin(playerSelection, computerSelection);
+            console.log(result);
+
+            if(result == "tied"){
+                console.log(`You ${result}!`);
+                document.getElementById("result").innerHTML = `You ${result}!`;
+            }else if(result == "win"){
+                console.log(`You ${result}! ${playerSelection} beats ${computerSelection}!`);
+                document.getElementById("result").innerHTML = `You ${result}! ${playerSelection} beats ${computerSelection}!`;
             }
-                
+            else{
+                console.log(`You ${result} lose! ${computerSelection} beats ${playerSelection}`);
+                document.getElementById("result").innerHTML = `You ${result}... ${computerSelection} beats ${playerSelection}!`;
+            }
         }
     </script>
 </body>
