@@ -7,11 +7,27 @@
     <h1>Result of your game!</h1>
     <p id="result"></p>
 
+    <p id="result-of-five"></p>
     <script>
         // Declare our variables
-        const playerSelection = prompt("What would you like to "); // TO DO 
-        const computerSelection = computerPlay().toLowerCase();
+        let playerSelection = prompt("Type 'Rock', 'Paper' or 'Scissors'!"); 
+        let choices = ['rock', 'paper', 'scissors'];
+
+        // Loop through appropriate choices and make sure user input matches correctly
+        function checkInput(){
+            if(playerSelection == "" || choices.includes(playerSelection.toLowerCase)){
+                alert("You must type 'Rock', 'Paper' or 'Scissors'!");
+                playerSelection = prompt("Type 'Rock', 'Paper' or 'Scissors'!");
+                checkInput();
+            }
+        }
+        
+        
+        let computerSelection = computerPlay().toLowerCase();
+        checkInput();
         playRound(playerSelection, computerSelection);
+
+        game(playerSelection, computerSelection);
 
         // Function that randomizes the computers play
         function computerPlay(){
@@ -58,7 +74,27 @@
 
         // Function that plays a round five times and returns who won most
         function game(playerSelection, computerSelection){
+            let computerWinCount;
+            let playerWinCount;
 
+            // Play 5 games
+            for(let i = 0; i < 5; i++){
+                let result = detectLossOrWin(playerSelection, computerSelection);
+                if(result === "win"){
+                    playerWinCount += 1;
+                }else if(result === "lose"){
+                    computerWinCount += 1;
+                }
+                compututerSelection = computerPlay();
+            }
+
+            if(playerWinCount > computerWinCount){
+                document.getElementById("result-of-five").innerHTML = "You won more games out of five!";
+            }else if(computerWinCount > playerWinCount){
+                document.getElementById("result-of-five").innerHTML = "The computer won more games out of five!";
+            }else{
+                document.getElementById("result-of-five").innerHTML = "You and the computer tied out of five!";
+            }
         }
 
         // Function that plays a round based off the player selection and computer selection and returns the result
